@@ -1,0 +1,14 @@
+create database ....
+
+
+
+///// next task
+
+select * from table1
+where ...
+order by 1 asc;
+
+////
+
+
+----- 
