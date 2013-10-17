@@ -1,16 +1,57 @@
-create database ....
+/////Write the list of SQL requests in a separate file to create: 
+/////a database;
 
-////new comment
+CREATE DATABASE my_db; 
 
+////three tables within this database;
 
+CREATE TABLE Customers
+(
+Cust_Id int NOT NULL AUTO_INCREMENT ,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+City varchar(255),
+PRIMARY KEY (Cust_Id)
+); 
 
-///// next task
+CREATE TABLE Orders
+(
+Order_Id int NOT NULL AUTO_INCREMENT ,
+OrderNo int NOT NULL,
+Cust_Id int,
+PRIMARY KEY (Order_Id),
+FOREIGN KEY (Cust_Id) REFERENCES Customers(Cust_Id)
+); 
 
-select * from table1
-where ...
-order by 1 asc;
+CREATE TABLE Products
+(
+Prod_Id int NOT NULL AUTO_INCREMENT, 
+ProdutNo int NOT NULL,
+ProductName varchar(255),
+Order_Id int,
+PRIMARY KEY (Prod_Id),
+FOREIGN KEY (Order_Id) REFERENCES Orders(Order_Id)
+); 
 
-////
+/////fill these tables;
+INSERT INTO Customers (  LastName,  FirstName,  City)
+VALUES ( 'Ivanov', 'Ivan', 'Kiev');
 
+INSERT INTO Orders (  OrderNo,  Cust_Id)
+VALUES ( 342512, 54);
 
------ 
+INSERT INTO Products (  ProdutNo,  ProductName, Order_Id )
+VALUES ( 42331, carrot, 23);
+
+/////simple statements: Select from one table, Select from few tables, Count rows for any table. 
+
+SELECT * FROM Customers
+WHERE City='Kiev'; 
+
+SELECT Customers.LastName, Orders. Order_Id
+FROM Customers
+INNER JOIN Orders
+ON Customers.Cust_Id =Orders. Cust_Id
+ORDER BY Customers.LastName; 
+
+SELECT COUNT (DISTINCT city) FROM Customers; 
